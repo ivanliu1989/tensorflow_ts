@@ -8,6 +8,7 @@ import pandas as pd
 from os import listdir
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 # Getting data
 listdir("./data")
@@ -26,3 +27,14 @@ test_end = n
 data_train = data.iloc[np.arange(train_start, train_end), :]
 data_test = data.iloc[np.arange(test_start, test_end), :]
 
+# Data scaling
+scaler = MinMaxScaler()
+scaler.fit(data_train)
+scaler.transform(data_train)
+scaler.transform(data_test)
+
+# Dependent & Independent variables
+X_train = data_train.iloc[:, 2:]
+y_train = data_train.iloc[:, 1]
+X_test = data_test.iloc[:, 2:]
+y_test = data_test.iloc[:, 1]
